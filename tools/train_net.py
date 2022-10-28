@@ -272,12 +272,12 @@ def train_epoch(
         train_meter.iter_toc()  # do measure allreduce for this meter
         train_meter.log_iter_stats(cur_epoch, cur_iter)
         # https://github.com/facebookresearch/SlowFast/issues/103#issuecomment-656983485
-        # torch.cuda.synchronize()
+        torch.cuda.synchronize()
         train_meter.iter_tic()
     del inputs
 
     # in case of fragmented memory
-    # torch.cuda.empty_cache()
+    torch.cuda.empty_cache()
 
     # Log epoch stats.
     train_meter.log_epoch_stats(cur_epoch)
